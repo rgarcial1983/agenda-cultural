@@ -16,7 +16,5 @@ public class Ciudad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Long idCiudad;
     private String nombre;
 }

@@ -27,6 +27,10 @@ public class Evento {
     @JoinColumn(name = "localizacion_id")
     private Localizacion localizacion;
 
+    @ManyToOne
+    @JoinColumn(name = "ciudad_id")
+    private Ciudad ciudad;
+
     @ManyToMany
     @JoinTable(
             name = "evento_categoria",
