@@ -17,7 +17,7 @@ public class Localizacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombreLugar;
+    private String lugar;
     private String enlaceGoogleMaps;
 
     // Getters y setters

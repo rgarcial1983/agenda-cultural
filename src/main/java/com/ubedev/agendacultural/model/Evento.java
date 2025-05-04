@@ -20,7 +20,6 @@ public class Evento {
     private Long id;
     private String titulo;
     private String descripcion;
-    private String lugar;
     private LocalDate fecha;
 
     @ManyToOne
