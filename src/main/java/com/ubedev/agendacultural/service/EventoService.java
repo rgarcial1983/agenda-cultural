@@ -7,8 +7,11 @@ import com.ubedev.agendacultural.model.Localizacion;
 import com.ubedev.agendacultural.repository.CategoriaRepository;
 import com.ubedev.agendacultural.repository.EventoRepository;
 import com.ubedev.agendacultural.repository.LocalizacionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -42,8 +45,9 @@ public class EventoService {
         return eventoRepository.save(evento);
     }
 
-    public List<Evento> listarEventos() {
-        return eventoRepository.findAll();
+    public Page<Evento> listarEventos(String titulo, LocalDate fechaInicio, LocalDate fechaFin, 
+                                    Long ciudadId, List<Long> categoriaIds, Pageable pageable) {
+        return eventoRepository.findByFiltros(titulo, fechaInicio, fechaFin, ciudadId, categoriaIds, pageable);
     }
 
     public Evento obtenerEventoPorId(Long id) {

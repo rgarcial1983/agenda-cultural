@@ -18,8 +18,9 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> listar() {
-        return ResponseEntity.ok(categoriaService.listar());
+    public ResponseEntity<List<Categoria>> listar(
+            @RequestParam(required = false) String nombre) {
+        return ResponseEntity.ok(categoriaService.listar(nombre));
     }
 
     @GetMapping("/{id}")

@@ -15,8 +15,8 @@ public class LocalizacionService {
         this.localizacionRepository = localizacionRepository;
     }
 
-    public List<Localizacion> listar() {
-        return localizacionRepository.findAll();
+    public List<Localizacion> listar(String lugar) {
+        return localizacionRepository.findByLugarContainingIgnoreCase(lugar);
     }
 
     public Localizacion crear(Localizacion localizacion) {

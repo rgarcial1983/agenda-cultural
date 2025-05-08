@@ -18,8 +18,9 @@ public class CiudadController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Ciudad>> listar() {
-        return ResponseEntity.ok(ciudadService.listar());
+    public ResponseEntity<List<Ciudad>> listar(
+            @RequestParam(required = false) String nombre) {
+        return ResponseEntity.ok(ciudadService.listar(nombre));
     }
 
     @GetMapping("/{id}")

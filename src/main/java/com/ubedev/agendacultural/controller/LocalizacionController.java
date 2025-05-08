@@ -18,8 +18,9 @@ public class LocalizacionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Localizacion>> listar() {
-        return ResponseEntity.ok(localizacionService.listar());
+    public ResponseEntity<List<Localizacion>> listar(
+            @RequestParam(required = false) String lugar) {
+        return ResponseEntity.ok(localizacionService.listar(lugar));
     }
 
     @GetMapping("/{id}")

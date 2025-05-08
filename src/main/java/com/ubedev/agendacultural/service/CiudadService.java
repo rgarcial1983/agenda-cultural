@@ -1,8 +1,6 @@
 package com.ubedev.agendacultural.service;
 
-import com.ubedev.agendacultural.model.Categoria;
 import com.ubedev.agendacultural.model.Ciudad;
-import com.ubedev.agendacultural.repository.CategoriaRepository;
 import com.ubedev.agendacultural.repository.CiudadRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +15,8 @@ public class CiudadService {
         this.ciudadRepository = ciudadRepository;
     }
 
-    public List<Ciudad> listar() {
-        return ciudadRepository.findAll();
+    public List<Ciudad> listar(String nombre) {
+        return ciudadRepository.findByNombreContainingIgnoreCase(nombre);
     }
 
     public Ciudad crear(Ciudad ciudad) {

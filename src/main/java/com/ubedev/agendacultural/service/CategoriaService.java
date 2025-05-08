@@ -15,8 +15,8 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
     }
 
-    public List<Categoria> listar() {
-        return categoriaRepository.findAll();
+    public List<Categoria> listar(String nombre) {
+        return categoriaRepository.findByNombreContainingIgnoreCase(nombre);
     }
 
     public Categoria crear(Categoria categoria) {
