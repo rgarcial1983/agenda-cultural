@@ -23,6 +23,10 @@ public class CiudadService {
         return ciudadRepository.save(ciudad);
     }
 
+    public Ciudad actualizar(Ciudad ciudad) {
+        return ciudadRepository.save(ciudad);
+    }
+
     public Ciudad obtenerPorId(Long id) {
         return ciudadRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ciudad no encontrada"));

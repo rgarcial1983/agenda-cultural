@@ -19,45 +19,57 @@ import java.util.Arrays;
 public class DataInitializer {
 
     @Bean
-    CommandLineRunner initData(EventoRepository eventoRepo, CiudadRepository ciudadRepo, CategoriaRepository categoriaRepo, LocalizacionRepository localizacionRepo) {
+    CommandLineRunner initData(EventoRepository eventoRepo, 
+                             CiudadRepository ciudadRepo, 
+                             CategoriaRepository categoriaRepo, 
+                             LocalizacionRepository localizacionRepo) {
         return args -> {
-            // Categorías de ejemplo
+            // Categorías básicas
             if (categoriaRepo.count() == 0) {
                 categoriaRepo.save(new Categoria(null, "Concierto"));
                 categoriaRepo.save(new Categoria(null, "Taller"));
-                categoriaRepo.save(new Categoria(null, "Infantil"));
                 categoriaRepo.save(new Categoria(null, "Gratuito"));
-                categoriaRepo.save(new Categoria(null, "Al aire libre"));
             }
 
-            // Ciudades de ejemplo
+            // Ciudad
+            Ciudad ubeda = null;
             if (ciudadRepo.count() == 0) {
-                ciudadRepo.save(new Ciudad(null, "Úbeda"));
-                ciudadRepo.save(new Ciudad(null, "Baeza"));
-                ciudadRepo.save(new Ciudad(null, "Linares"));
+                ubeda = ciudadRepo.save(new Ciudad(null, "Úbeda"));
+            } else {
+                ubeda = ciudadRepo.findByNombre("Úbeda").orElse(null);
             }
 
-            // Localizaciones de ejemplo
+            // Localizaciones básicas
             if (localizacionRepo.count() == 0) {
-                localizacionRepo.save(new Localizacion(null, "Auditorio Municipal", "https://maps.google.com/?q=-34.6037,-58.3816"));
-                localizacionRepo.save(new Localizacion(null, "Plaza Central", "https://maps.google.com/?q=-34.6047,-58.3825"));
-                localizacionRepo.save(new Localizacion(null, "Centro Cultural Sur", "https://maps.google.com/?q=-34.6080,-58.3790"));
+                localizacionRepo.save(new Localizacion(null, "Plaza Vázquez de Molina", "https://goo.gl/maps/8XJZQZQZQZQZQZQZQ"));
+                localizacionRepo.save(new Localizacion(null, "Palacio de las Cadenas", "https://goo.gl/maps/9XJZQZQZQZQZQZQZQ"));
             }
 
-            // Crear algunos eventos de ejemplo
+            // Eventos básicos
             if (eventoRepo.count() == 0) {
+                Categoria concierto = categoriaRepo.findByNombre("Concierto").orElse(null);
+                Categoria gratuito = categoriaRepo.findByNombre("Gratuito").orElse(null);
+                Localizacion plaza = localizacionRepo.findByLugar("Plaza Vázquez de Molina").orElse(null);
+                Localizacion palacio = localizacionRepo.findByLugar("Palacio de las Cadenas").orElse(null);
+
                 Evento evento1 = new Evento(
-                        null, "Concierto de Música Clásica", "Un evento cultural de música clásica",
-                        LocalDate.of(2023, 6, 15),
-                        localizacionRepo.findById(1L).orElse(null), ciudadRepo.findById(1L).orElse(null),
-                        Arrays.asList(categoriaRepo.findById(1L).orElse(null))
+                    null, 
+                    "Concierto de Música Renacentista",
+                    "Concierto especial de música renacentista",
+                    LocalDate.of(2024, 6, 15),
+                    plaza,
+                    ubeda,
+                    Arrays.asList(concierto, gratuito)
                 );
 
                 Evento evento2 = new Evento(
-                        null, "Taller de Pintura", "Un taller de pintura para todas las edades",
-                        LocalDate.of(2023, 7, 10),
-                        localizacionRepo.findById(3L).orElse(null), ciudadRepo.findById(1L).orElse(null),
-                        Arrays.asList(categoriaRepo.findById(2L).orElse(null),categoriaRepo.findById(1L).orElse(null))
+                    null,
+                    "Visita Guiada",
+                    "Recorrido por los palacios renacentistas",
+                    LocalDate.of(2024, 6, 20),
+                    palacio,
+                    ubeda,
+                    Arrays.asList(gratuito)
                 );
 
                 eventoRepo.saveAll(Arrays.asList(evento1, evento2));

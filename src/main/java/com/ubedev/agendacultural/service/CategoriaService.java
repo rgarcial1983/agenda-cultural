@@ -3,10 +3,12 @@ package com.ubedev.agendacultural.service;
 import com.ubedev.agendacultural.model.Categoria;
 import com.ubedev.agendacultural.repository.CategoriaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class CategoriaService {
 
     private final CategoriaRepository categoriaRepository;
@@ -20,6 +22,10 @@ public class CategoriaService {
     }
 
     public Categoria crear(Categoria categoria) {
+        return categoriaRepository.save(categoria);
+    }
+
+    public Categoria actualizar(Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
 
