@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class Evento {
     private String titulo;
     private String descripcion;
     private LocalDate fecha;
+    private String hora;
+    private String imagenurl;
 
     @ManyToOne
     @JoinColumn(name = "localizacion_id")
