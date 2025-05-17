@@ -21,6 +21,8 @@ public class EventoDTO {
     private String descripcion;
     @NotNull(message = "La fecha es obligatoria")
     private LocalDate fecha;
-    private Long localizacionId;
-    private List<Long> categoriaIds;
+    private String hora;
+    private String imagenurl;
+    private LocalizacionDTO localizacion;
+    private List<CategoriaDTO> categorias;
 }
