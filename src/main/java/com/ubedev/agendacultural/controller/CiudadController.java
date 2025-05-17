@@ -1,9 +1,7 @@
 package com.ubedev.agendacultural.controller;
 
-import com.ubedev.agendacultural.dto.ciudad.CiudadCreateDTO;
-import com.ubedev.agendacultural.dto.ciudad.CiudadResponseDTO;
-import com.ubedev.agendacultural.dto.ciudad.CiudadUpdateDTO;
 import com.ubedev.agendacultural.mapper.CiudadMapper;
+import com.ubedev.agendacultural.dto.CiudadDTO;
 import com.ubedev.agendacultural.model.Ciudad;
 import com.ubedev.agendacultural.service.CiudadService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,37 +29,37 @@ public class CiudadController {
     @GetMapping
     @Operation(summary = "Listar ciudades", description = "Obtiene una lista de ciudades, opcionalmente filtrada por nombre")
     public ResponseEntity<List<CiudadResponseDTO>> listar(
-            @RequestParam(required = false) String nombre) {
+ @RequestParam(required = false) String nombre) {
         List<Ciudad> ciudades = ciudadService.listar(nombre);
         List<CiudadResponseDTO> dtos = ciudades.stream()
-                .map(ciudadMapper::toResponseDTO)
+ .map(ciudadMapper::toResponseDTO)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtener ciudad", description = "Obtiene una ciudad por su ID")
-    public ResponseEntity<CiudadResponseDTO> obtener(@PathVariable Long id) {
+ public ResponseEntity<CiudadDTO> obtener(@PathVariable Long id) {
         Ciudad ciudad = ciudadService.obtenerPorId(id);
-        return ResponseEntity.ok(ciudadMapper.toResponseDTO(ciudad));
+ return ResponseEntity.ok(ciudadMapper.toDTO(ciudad));
     }
 
     @PostMapping
     @Operation(summary = "Crear ciudad", description = "Crea una nueva ciudad")
-    public ResponseEntity<CiudadResponseDTO> crear(@Valid @RequestBody CiudadCreateDTO dto) {
-        Ciudad ciudad = ciudadService.crear(ciudadMapper.toEntity(dto));
-        return ResponseEntity.ok(ciudadMapper.toResponseDTO(ciudad));
+ public ResponseEntity<CiudadDTO> crear(@Valid @RequestBody CiudadDTO dto) {
+ Ciudad ciudad = ciudadService.crear(ciudadMapper.toEntity(dto));
+ return ResponseEntity.ok(ciudadMapper.toDTO(ciudad));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar ciudad", description = "Actualiza una ciudad existente")
-    public ResponseEntity<CiudadResponseDTO> actualizar(
+ public ResponseEntity<CiudadDTO> actualizar(
             @PathVariable Long id,
-            @Valid @RequestBody CiudadUpdateDTO dto) {
+ @Valid @RequestBody CiudadDTO dto) {
         Ciudad ciudad = ciudadService.obtenerPorId(id);
         ciudadMapper.updateEntityFromDTO(dto, ciudad);
-        ciudad = ciudadService.actualizar(ciudad);
-        return ResponseEntity.ok(ciudadMapper.toResponseDTO(ciudad));
+ ciudad = ciudadService.actualizar(ciudad);
+ return ResponseEntity.ok(ciudadMapper.toDTO(ciudad));
     }
 
     @DeleteMapping("/{id}")

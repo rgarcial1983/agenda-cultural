@@ -1,10 +1,7 @@
 package com.ubedev.agendacultural.controller;
 
-import com.ubedev.agendacultural.dto.categoria.CategoriaCreateDTO;
-import com.ubedev.agendacultural.dto.categoria.CategoriaResponseDTO;
-import com.ubedev.agendacultural.dto.categoria.CategoriaUpdateDTO;
+import com.ubedev.agendacultural.dto.CategoriaDTO;
 import com.ubedev.agendacultural.mapper.CategoriaMapper;
-import com.ubedev.agendacultural.model.Categoria;
 import com.ubedev.agendacultural.service.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,6 +1,8 @@
 package com.ubedev.agendacultural.service;
 
+import com.ubedev.agendacultural.dto.CategoriaDTO;
 import com.ubedev.agendacultural.model.Categoria;
+import com.ubedev.agendacultural.mapper.CategoriaMapper;
 import com.ubedev.agendacultural.repository.CategoriaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
