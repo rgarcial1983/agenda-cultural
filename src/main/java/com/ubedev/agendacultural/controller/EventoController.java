@@ -34,14 +34,14 @@ public class EventoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<EventoDTO>> listarEventos(
+    public ResponseEntity<Page<Evento>> listarEventos(
             @RequestParam(required = false) String titulo,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaInicio,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFin,
             @RequestParam(required = false) Long ciudadId,
             @RequestParam(required = false) List<Long> categoriaIds,
             @PageableDefault(size = 10) Pageable pageable) {
-        Page<EventoDTO> eventos = eventoService.listarEventos(titulo, fechaInicio, fechaFin, ciudadId, categoriaIds, pageable);
+        Page<Evento> eventos = eventoService.listarEventos(titulo, fechaInicio, fechaFin, ciudadId, categoriaIds, pageable);
         return ResponseEntity.ok(eventos);
     }
 
