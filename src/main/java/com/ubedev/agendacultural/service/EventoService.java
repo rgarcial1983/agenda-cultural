@@ -69,7 +69,6 @@ public class EventoService {
         Evento evento = eventoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
         // MapStruct can handle updating the existing entity from the DTO
-        eventoMapper.updateEntityFromDTO(dto, evento);
         Evento updatedEvento = eventoRepository.save(evento);
         return eventoMapper.toDTO(updatedEvento);
     }

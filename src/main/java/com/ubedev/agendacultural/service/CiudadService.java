@@ -49,7 +49,6 @@ public class CiudadService {
     public CiudadDTO actualizar(Long id, CiudadDTO ciudadDTO) {
         logger.info("Actualizando ciudad con ID: {}", id);
         Ciudad existingCiudad = obtenerCiudadPorId(id); // Use internal method to get entity
-        ciudadMapper.updateEntityFromDTO(ciudadDTO, existingCiudad);
         Ciudad updatedCiudad = ciudadRepository.save(existingCiudad);
         return ciudadMapper.toDTO(updatedCiudad);
     }

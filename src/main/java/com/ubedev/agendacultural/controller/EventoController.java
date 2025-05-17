@@ -29,8 +29,8 @@ public class EventoController {
 
     @PostMapping
     public ResponseEntity<EventoDTO> crearEvento(@Valid @RequestBody EventoDTO dto) {
- Evento evento = eventoService.crearEvento(dto);
- return ResponseEntity.ok(eventoMapper.toDTO(evento));
+        EventoDTO evento = eventoService.crear(dto);
+        return ResponseEntity.ok(evento);
     }
 
     @GetMapping
@@ -41,20 +41,20 @@ public class EventoController {
             @RequestParam(required = false) Long ciudadId,
             @RequestParam(required = false) List<Long> categoriaIds,
             @PageableDefault(size = 10) Pageable pageable) {
- Page<Evento> eventos = eventoService.listarEventos(titulo, fechaInicio, fechaFin, ciudadId, categoriaIds, pageable);
- return ResponseEntity.ok(eventos.map(eventoMapper::toDTO));
+        Page<EventoDTO> eventos = eventoService.listarEventos(titulo, fechaInicio, fechaFin, ciudadId, categoriaIds, pageable);
+        return ResponseEntity.ok(eventos);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Evento> obtenerEvento(@PathVariable Long id) {
-        Evento evento = eventoService.obtenerEventoPorId(id);
+    public ResponseEntity<EventoDTO> obtenerEvento(@PathVariable Long id) {
+        EventoDTO evento = eventoService.obtenerPorId(id);
         return ResponseEntity.ok(evento);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EventoDTO> actualizarEvento(@PathVariable Long id, @Valid @RequestBody EventoDTO dto) {
-        Evento evento = eventoService.actualizar(id, dto);
-        return ResponseEntity.ok(eventoMapper.toDTO(evento));
+        EventoDTO evento = eventoService.actualizar(id, dto);
+        return ResponseEntity.ok(evento);
     }
 
     @DeleteMapping("/{id}")
